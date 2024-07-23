@@ -1,0 +1,36 @@
+{
+  "name": "mobile-commons-js",
+  "main": "dist/index.js",
+  "version": "0.1.0",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/xml2js": "^0.4.14"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "compile": "tsc -p tsconfig.build.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@types/lodash": "^4.17.7",
+    "axios": "^1.7.2",
+    "fast-xml-parser": "^4.4.0",
+    "lodash": "^4.17.21",
+    "xml2js": "^0.6.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:uaw-union/mobile-commons-js.git"
+  },
+  "author": "Ben Packer <ben.paul.ryan.packer@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uaw-union/mobile-commons-js/issues"
+  },
+  "homepage": "https://github.com/uaw-union/mobile-commons-js"
+}
