@@ -11,7 +11,11 @@ const paginateUntilUndefined = async <T>(
     if (results === undefined || results.length === 0) {
       break;
     }
-    allResults.push(...results);
+    if (Array.isArray(results)) {
+      allResults.push(...results);
+    } else {
+      allResults.push(results);
+    }
     page++;
   }
   return allResults;
