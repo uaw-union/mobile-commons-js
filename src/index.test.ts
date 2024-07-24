@@ -5,13 +5,13 @@ import { MobileCommonsClient } from "./index";
 describe("MobileCommonsClient", () => {
   it("should list campaigns", async () => {
     const client = new MobileCommonsClient(
-      "bpacker@uaw.net",
-      "KRA@ykw3cfy2npj9cfx"
+      "", // Username
+      "" // Password
     );
     // await client.listGroups().then(console.log);
     // await client.listGroupMembers("941735").then(console.log);
     // await client.listCampaigns().then(console.log);
-    await client.listCampaignSubscribers("235948").then(console.log);
+    // await client.listCampaignSubscribers("235948").then(console.log);
     // await client.listProfiles().then(console.log);
     // await client.listBroadcasts().then(console.log);
     // await client.listClicks("4424682").then(console.log);

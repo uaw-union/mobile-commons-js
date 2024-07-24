@@ -80,22 +80,73 @@ export class MobileCommonsClient {
     });
   }
 
-  // async listGroupMembers(groupId: string, updatedSince?: Date): Promise<any> {
-  //   const response = await this.axios.get("/group_members", {
-  //     params: {
-  //       from: updatedSince?.toISOString(),
-  //       group_id: groupId,
-  //       limit: 10,
-  //     },
-  //   });
-  //   return response.data.group.profile;
-  // }
+  async listGroupMembers(
+    groupId: string,
+    updatedSince?: Date
+  ): Promise<
+    {
+      first_name: string;
+      last_name: string;
+      phone_number: string;
+      email: string;
+      status: string;
+      created_at: string;
+      updated_at: string;
+      opted_out_at: string;
+      opted_out_source: string;
+      source: {
+        type: string;
+        name: string;
+        id: string;
+      };
+      address: {
+        street1: string;
+        street2: string;
+        city: string;
+        state: string;
+        postal_code: string;
+        country: string;
+      };
+      last_saved_location: {
+        latitude: number;
+        longitude: number;
+        precision: string;
+        city: string;
+        state: string;
+        postal_code: string;
+        country: string;
+      };
+      last_saved_districts: {
+        congressional_district: string;
+        state_upper_district: string;
+        state_lower_district: string;
+        split_district: string;
+      };
+      custom_columns: {
+        custom_column: any[];
+      };
+      clicks: string;
+      id: string;
+    }[]
+  > {
+    return await paginateUntilUndefined(async (page) => {
+      const response = await this.axios.get("/group_members", {
+        params: {
+          from: updatedSince?.toISOString(),
+          group_id: groupId,
+          limit: 100,
+          page,
+        },
+      });
+      return response.data.group.profile;
+    });
+  }
 
   async listCampaignSubscribers(campaignId: string): Promise<
     {
-      id: number;
-      profile_id: number;
-      phone_number: number;
+      id: string;
+      profile_id: string;
+      phone_number: string;
       activated_at: string;
       opted_out_at: string;
     }[]
