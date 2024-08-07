@@ -227,7 +227,7 @@ export class MobileCommonsClient {
     return response.data;
   }
 
-  async listBroadcasts(): Promise<
+  async listBroadcasts(campaignId?: string): Promise<
     {
       name: string;
       body: string;
@@ -255,8 +255,12 @@ export class MobileCommonsClient {
       status: string;
     }[]
   > {
-    const response = await this.axios.get("/broadcasts");
-    return response.data.broadcasts.broadcast;
+    return await paginateUntilUndefined(async (page) => {
+      const response = await this.axios.get("/broadcasts", {
+        params: campaignId ? { page, campaign_id: campaignId } : { page },
+      });
+      return response.data.broadcasts.broadcast;
+    });
   }
 
   async listTinyUrls(): Promise<
