@@ -279,7 +279,7 @@ export class MobileCommonsClient {
     return response.data.tinyurls.tinyurl;
   }
 
-  async listClicks(url_id: string): Promise<
+  async listClicks(urlIdOrUrl: { url_id: string } | { url: string }): Promise<
     {
       created_at: string;
       url: string;
@@ -292,9 +292,10 @@ export class MobileCommonsClient {
     }[]
   > {
     const response = await this.axios.get("/clicks", {
-      params: {
-        url_id,
-      },
+      params:
+        "url_id" in urlIdOrUrl
+          ? { url_id: urlIdOrUrl.url_id }
+          : { url: urlIdOrUrl.url },
     });
     return response.data.clicks.click;
   }
