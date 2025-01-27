@@ -4,10 +4,9 @@ import { MobileCommonsClient } from "./index";
 
 describe("MobileCommonsClient", () => {
   it("should list campaigns", async () => {
-    const client = new MobileCommonsClient(
-      "", // Username
-      "" // Password
-    );
+    const client = new MobileCommonsClient({
+      apiKey: "apiKeyHere",
+    });
     // await client.listGroups().then(console.log);
     // await client.listGroupMembers("941735").then(console.log);
     // await client.listCampaigns().then(console.log);

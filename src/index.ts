@@ -22,20 +22,25 @@ const paginateUntilUndefined = async <T>(
 };
 
 export class MobileCommonsClient {
-  username: string;
-  password: string;
+  auth: { username: string; password: string } | { apiKey: string };
   axios: AxiosInstance;
 
-  constructor(username: string, password: string) {
-    this.username = username;
-    this.password = password;
+  constructor(
+    auth: { username: string; password: string } | { apiKey: string }
+  ) {
+    this.auth = auth;
+
     this.axios = axios.create({
       timeout: 10 * 1000,
       baseURL: "https://secure.mcommons.com/api",
-      auth: {
-        username,
-        password,
-      },
+      ...("apiKey" in auth
+        ? { headers: { Authorization: `Bearer ${auth.apiKey}` } }
+        : {
+            auth: {
+              username: auth.username,
+              password: auth.password,
+            },
+          }),
 
       transformResponse: [
         (data) => {
